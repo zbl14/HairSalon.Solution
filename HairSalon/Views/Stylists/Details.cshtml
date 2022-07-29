@@ -3,3 +3,29 @@
 }
 
 @using HairSalon.Models;
+@model HairSalon.Models.Stylist
+
+<div class="jumbotron text-center">
+  <h2>Details of @Html.DisplayFor(model => model.Name)</h2>
+</div>
+<div class="text-center">
+  <div class="btn-group btn-group-lg" role="group" aria-label="Large button group">
+    <button type="button" class="btn btn-outline-dark">@Html.ActionLink("Add new client", "Create", "Clients")</button>
+    <button type="button" class="btn btn-outline-dark">@Html.ActionLink("Edit stylist", "Edit", new { id = Model.StylistId})</button>
+    <button type="button" class="btn btn-outline-dark">@Html.ActionLink("Delete stylist", "Delete", new { id = Model.StylistId})</button>
+    <button type="button" class="btn btn-outline-dark">@Html.ActionLink("Back to stylist list", "Index")</button>
+  </div>
+</div>
+<hr />
+<div>
+  @if (@Model.Clients.Count == 0)
+  {
+    <h3>No clients have been added yet!</h3>
+  } 
+  <ul>
+    @foreach(Client client in Model.Clients)
+    {
+      <li>@Html.ActionLink($"{client.Name}", "Details", "Clients", new { id = client.ClientId}) </li>
+    }
+  </ul>
+</div>
