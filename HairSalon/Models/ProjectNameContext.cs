@@ -1,10 +1,11 @@
 using Microsoft.EntityFrameworkCore;
 
-namespace ProjectName.Models
+namespace HairSalon.Models
 {
-  public class ProjectNameContext : DbContext
+  public class HairSalonContext : DbContext
   {
-    public DbSet<ClassName> ClassNames { get; set; }
+    public DbSet<Stylist> Stylists { get; set; }
+    public DbSet<Client> Clients { get; set; }
 
     public ToDoListContext(DbContextOptions options) : base(options) { }
 
