@@ -2,4 +2,21 @@
   Layout = "_Layout";
 }
 
-@using HairSalon.Models;
+@model HairSalon.Models.Client
+
+<div class="jumbotron text-center">
+  <h2>Are you sure you want to delete @Html.DisplayFor(model => model.Name)</h2>
+</div>
+<div class="text-center">
+  <div class="btn-group btn-group-lg" role="group" aria-label="Large button group">
+    <button type="button" class="btn btn-outline-dark">@Html.ActionLink("Back to client list", "Index")
+    <button type="button" class="btn btn-outline-dark">@Html.ActionLink("Home", "Index", "Home")</button>
+  </div>
+</div>
+<hr />
+<div>
+  @using (Html.BeginForm())
+  {
+    <button type="submit" class="btn btn-primary">Delete</button>
+  }
+</div>
