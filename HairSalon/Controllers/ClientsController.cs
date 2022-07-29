@@ -4,6 +4,7 @@ using HairSalon.Models;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 
 namespace HairSalon.Controllers
 {
@@ -16,11 +17,26 @@ namespace HairSalon.Controllers
       _db = db;
     }
 
-    public ActionResult Index()
+    public ActionResult Index(string searchString)
     {
-      List<Client> model = _db.Clients.Include(client => client.Stylist).ToList();
       ViewBag.PageTitle = "View All Clients";
-      return View(model);
+      if (!String.IsNullOrEmpty(searchString))
+      {
+        List<Client> model = _db.Clients
+          .Where(client => client.Name.Contains(searchString))
+          .OrderBy(client => client.Name)
+          .Include(client => client.Stylist)
+          .ToList();
+        return View(model);
+      }
+      else
+      {
+        List<Client> model = _db.Clients
+          .OrderBy(client => client.Name)
+          .Include(client => client.Stylist)
+          .ToList();
+        return View(model);
+      }
     }
 
     public ActionResult Create()
