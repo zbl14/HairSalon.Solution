@@ -21,15 +21,16 @@ namespace HairSalon.Controllers
       ViewBag.PageTitle = "View All Stylists";
       if (!String.IsNullOrEmpty(searchString))
       {
-        List<Stylist> model = _db.Stylists.Where(x => x.Name.Contains(searchString))
-          .OrderBy(x => x.Name)
+        List<Stylist> model = _db.Stylists
+          .Where(client => client.Name.Contains(searchString))
+          .OrderBy(client => client.Name)
           .ToList(); 
         return View(model);         
       }
       else
       {
         List<Stylist> model = _db.Stylists
-          .OrderBy(x => x.Name)
+          .OrderBy(client => client.Name)
           .ToList();
         return View(model);
       }
@@ -51,8 +52,8 @@ namespace HairSalon.Controllers
 
     public ActionResult Details(int id)
     {
-      Stylist thisStylist = _db.Stylists.FirstOrDefault(stylist => stylist.StylistId == id);
       ViewBag.PageTitle = "Stylist Details";
+      Stylist thisStylist = _db.Stylists.FirstOrDefault(stylist => stylist.StylistId == id);
       return View(thisStylist);
     }
 
