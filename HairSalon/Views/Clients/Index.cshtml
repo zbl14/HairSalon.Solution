@@ -21,10 +21,19 @@
     <h3>No clients have been added yet!</h3>
   } 
 
-  <ul>
-    @foreach(Client client in Model)
-    {
-      <li>@Html.ActionLink($"{client.Name}", "Details", new { id = client.ClientId })</li>
-    }
-  </ul>
+  <table class="table">
+    <thead>
+      <th scope="col">Client Name</th>
+      <th scope="col">Stylist Name</th>
+    </thead>
+    <tbody>
+      @foreach(Client client in Model)
+      {
+        <tr>
+          <td>@Html.ActionLink($"{client.Name}", "Details", new { id = client.ClientId })</td>
+          <td>@client.Stylist.Name</td>
+        </tr>
+      }
+    </tbody>
+  </table>
 </div>
