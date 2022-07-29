@@ -2,4 +2,27 @@
   Layout = "_Layout";
 }
 
-@using HairSalon.Models;
+@model HairSalon.Models.Client
+
+<div class="jumbotron text-center">
+  <h2>Add a new client</h2>
+</div>
+<div class="text-center">
+  <div class="btn-group btn-group-lg" role="group" aria-label="Large button group">
+    <button type="button" class="btn btn-outline-dark">@Html.ActionLink("Show all clients", "Index")</button>
+    <button type="button" class="btn btn-outline-dark">@Html.ActionLink("Home", "Index", "Home")</button>
+  </div>
+</div>
+<hr />
+<div>
+  @using (Html.BeginForm())
+  {
+    @Html.LabelFor(model => model.Name)
+    @Html.TextBoxFor(model => model.Name)
+
+    @Html.LabelFor(model => model.Stylist)
+    @Html.DropDownList("StylistId")
+
+    <button type="submit" class="btn btn-primary">Add new client</button>
+  }
+</div>

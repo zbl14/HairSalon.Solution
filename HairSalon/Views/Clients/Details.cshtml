@@ -2,4 +2,22 @@
   Layout = "_Layout";
 }
 
-@using HairSalon.Models;
+@model HairSalon.Models.Client
+
+<div class="jumbotron text-center">
+  <h2>Details of @Html.DisplayFor(model => model.Name)</h2>
+</div>
+<div class="text-center">
+  <div class="btn-group btn-group-lg" role="group" aria-label="Large button group">
+    <button type="button" class="btn btn-outline-dark">@Html.ActionLink("Add new client", "Create", "Clients")</button>
+    <button type="button" class="btn btn-outline-dark">@Html.ActionLink("Edit client", "Edit", new { id = Model.ClientId})</button>
+    <button type="button" class="btn btn-outline-dark">@Html.ActionLink("Delete client", "Delete", new { id = Model.ClientId})</button>
+    <button type="button" class="btn btn-outline-dark">@Html.ActionLink("Back to client list", "Index")</button>
+  </div>
+</div>
+<hr />
+<div>
+  <ul>
+    <li>@Html.DisplayNameFor(model => model.Name): @Html.DisplayFor(model => model.Name)</li>
+  </ul>
+</div>
