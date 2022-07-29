@@ -15,6 +15,15 @@
 </div>
 <hr />
 <div>
+  @using (Html.BeginForm("Index","Stylists",FormMethod.Get))
+  {    
+    <p>
+      Name: @Html.TextBox("SearchString") 
+      <input type="submit" value="Filter" />
+    </p> 
+  }
+</div> 
+<div>
   @if (@Model.Count == 0)
   {
     <h3>No stylists have been added yet!</h3>

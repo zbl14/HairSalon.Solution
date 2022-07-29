@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using HairSalon.Models;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace HairSalon.Controllers
 {
@@ -15,13 +16,23 @@ namespace HairSalon.Controllers
       _db = db;
     }
 
-    public ActionResult Index()
+    public ActionResult Index(string searchString)
     {
-      List<Stylist> model = _db.Stylists
-        .OrderBy(x => x.Name)
-        .ToList();
       ViewBag.PageTitle = "View All Stylists";
-      return View(model);
+      if (!String.IsNullOrEmpty(searchString))
+      {
+        List<Stylist> model = _db.Stylists.Where(x => x.Name.Contains(searchString))
+          .OrderBy(x => x.Name)
+          .ToList(); 
+        return View(model);         
+      }
+      else
+      {
+        List<Stylist> model = _db.Stylists
+          .OrderBy(x => x.Name)
+          .ToList();
+        return View(model);
+      }
     }
 
     public ActionResult Create()
